@@ -1,0 +1,31 @@
+{
+  "name": "11-express",
+  "version": "1.0.0",
+  "description": "![cf](https://i.imgur.com/7v5ASc8.png) 11: Single Resource Express API ======",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veoh1989/11-express.git"
+  },
+  "author": "Liza Oh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veoh1989/11-express/issues"
+  },
+  "homepage": "https://github.com/veoh1989/11-express#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0"
+  }
+}
