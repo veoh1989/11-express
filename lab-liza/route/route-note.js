@@ -26,6 +26,12 @@ module.exports = function(router) {
       .catch(err => errorHandler(err, res));
   });
 
+  router.put('/note/:id', bodyParser, (req, res) => {
+    new Note(req.body.name, req.body.data)
+      .then(note => storage.update('note', req.params.id, note))
+      .then(item => res.status(204).json(item))
+      .catch(err => errorHandler(err, res));
+  });
 
 
 };
