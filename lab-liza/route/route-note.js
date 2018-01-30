@@ -32,6 +32,10 @@ module.exports = function(router) {
       .then(item => res.status(204).json(item))
       .catch(err => errorHandler(err, res));
   });
-
+  router.delete('/note/:id', (req, res) => {
+    storage.destroy('note', req.params.id)
+      .then(item => res.status(204).json(item))
+      .catch(err => errorHandler(err, res));
+  });
 
 };
