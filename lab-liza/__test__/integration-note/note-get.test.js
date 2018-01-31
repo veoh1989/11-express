@@ -56,8 +56,8 @@ describe('GET/api/v1/note', function () {
       });
 
       it('should respond with one note', () => {
-        expect(this.response.body.data).toEqual('something21');
-        expect(this.response.body.name).toEqual('joe1');
+        expect(this.response.body.data).toEqual('hello world');
+        expect(this.response.body.name).toEqual('hello');
       });
     });
 
