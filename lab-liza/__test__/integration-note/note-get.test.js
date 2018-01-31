@@ -1,17 +1,79 @@
 'use strict';
 
 const server = require('../../lib/server');
+const superagent = require('superagent');
 require('jest');
 
-describe('POST /api/v1/note', function () {
+let testId;
+
+describe('GET/api/v1/note', function () {
+  this.mockNote = {name: 'hello', data: 'hello world'};
+
   beforeAll(() => server.start(process.env.PORT, (err) => console.log(`Listening on ${process.env.PORT}`)));
   afterAll(() => server.stop());
 
-  describe('Valid req/res', () => {
+  describe('Fetch All', () => {
+    describe('Valid req/res', () => {
+      beforeAll(() => {
+        return superagent.get(':4000/api/v1/note')
+          .send(this.mockNote)
+          .then(res => this.response = res);
+      });
 
+      it('should respond with a status of 200', () => {
+        expect(this.response.status).toBe(200);
+        expect(this.response.body[0]);
+        testId = this.response.body[0];
+      });
+
+      it('should respond with all data', () => {
+        expect(this.response.body);
+      });
+
+    });
+
+    describe('Invalid req/res', () => {
+      it('should return a status 404 on bad path', () => {
+        return superagent.post(':4000/api/v1/doesNotExist')
+          .send(this.mockNote)
+          .catch(err => {
+            expect(err.status).toBe(404);
+            expect(err.response.text).toMatch(/path error/i);
+          });
+      });
+    });
   });
 
-  describe('Invalid req/res', () => {
-    it('should return true', () => expect(true).toBeTruthy());
-  });
+  // describe('Fetch One', () => {
+  //   describe('Valid req/res', () => {
+  //     beforeAll(() => {
+  //       return superagent.get(':4000/api/v1/note')
+  //         .send(this.mockNote)
+  //         .then(res => this.response = res);
+  //     });
+
+  //     it('should respond with a status of 200', () => {
+  //       expect(this.response.status).toBe(200);
+  //       expect(this.response.body[0]);
+  //       testId = this.response.body[0];
+  //     });
+
+  //     it('should respond with all data', () => {
+  //       expect(this.response.body);
+  //     });
+
+  //   });
+
+  //   describe('Invalid req/res', () => {
+  //     it('should return a status 404 on bad path', () => {
+  //       return superagent.post(':4000/api/v1/doesNotExist')
+  //         .send(this.mockNote)
+  //         .catch(err => {
+  //           expect(err.status).toBe(404);
+  //           expect(err.response.text).toMatch(/path error/i);
+  //         });
+  //     });
+  //   });
+  // });
+
 });
