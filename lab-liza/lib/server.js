@@ -8,14 +8,11 @@ const errorHandler = require('./error-handler');
 
 // Application setup
 const app = express();
-const router_notes = express.Router();
-
-app.use('/api/v1/note', router_notes);
+const router = express.Router();
+app.use('/api/v1', router);
 app.use(cors());
-
-// Route setup
-require('../route/route-note')(router_notes);
-app.use('/{0,}', (req, res) => errorHandler(new Error('Path Error. Route not found.'), res));
+require('../route/route-note')(router);
+app.use('/*', (req, res) => errorHandler(new Error('Path Error. Route not found.'), res));
 
 // Server controls
 const server = module.exports = {};

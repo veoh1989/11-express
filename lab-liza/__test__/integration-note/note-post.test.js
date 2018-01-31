@@ -5,33 +5,30 @@ const superagent = require('superagent');
 require('jest');
 
 describe('POST /api/v1/note', function() {
-  this.mockNote = {title: 'hello', content: 'hello world'};
+  this.mockNote = {name: 'hello', data: 'hello world'};
 
   beforeAll(() => server.start(process.env.PORT, (err) => console.log(`Listening on ${process.env.PORT}`)));
   afterAll(() => server.stop());
 
-  // describe('Testing server methods', () => {
-  //   expect(server.start(process.env.PORT)).toBeInstanceOf(Error)
-  // })
-
   describe('Valid req/res', () => {
     beforeAll(() => {
-      return superagent.post(':4000/api/v1/note')
+      return superagent.post('localhost:4000/api/v1/note')
         .send(this.mockNote)
         .then(res => this.response = res);
     });
-
+    // console.log(this,'this is this!');
+    console.log(res);
     it('should respond with a status of 201', () => {
       expect(this.response.status).toBe(201);
     });
-    it('should post a new note with title, content, and _id', () => {
-      expect(this.response.body).toHaveProperty('title');
-      expect(this.response.body).toHaveProperty('content');
+    it('should post a new note with name, data, and _id', () => {
+      expect(this.response.body).toHaveProperty('name');
+      expect(this.response.body).toHaveProperty('data');
       expect(this.response.body).toHaveProperty('_id');
     });
-    it('should respond with a title of "hello" and content of "hello world"', () => {
-      expect(this.response.body.title).toEqual(this.mockNote.title);
-      expect(this.response.body.content).toEqual(this.mockNote.content);
+    it('should respond with a name of "hello" and data of "hello world"', () => {
+      expect(this.response.body.name).toEqual(this.mockNote.name);
+      expect(this.response.body.data).toEqual(this.mockNote.data);
     });
   });
 

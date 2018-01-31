@@ -1,7 +1,7 @@
 {
   "name": "lab-liza",
   "version": "1.0.0",
-  "description": "",
+  "description": "**Author**: Liza Oh",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -44,6 +44,7 @@
   "devDependencies": {
     "debug": "^3.1.0",
     "dotenv": "^5.0.0",
+    "jest": "^22.1.4",
     "superagent": "^3.8.2"
   }
 }
